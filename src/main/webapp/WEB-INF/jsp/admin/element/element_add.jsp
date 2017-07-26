@@ -6,8 +6,8 @@
 
     <%@include file="element_sidebar.jsp"%>
 
-    <div id="main-wrapper" class="col-md-11 pull-right">
-        <div class="col-lg-8 col-md-7 col-sm-6">
+    <div id="main-wrapper" class="col-sm-10">
+        <div class="col-sm-12">
             <form:form cssClass="form-horizontal" modelAttribute="elementVO" action="/admin/element/add" method="post">
                 <legend>Element Management</legend>
                 <div class="form-group">
@@ -32,6 +32,9 @@
                     </div>
                 </div>
             </form:form>
+        </div>
+        <div class="col-sm-8">
+            <%--todo: ALERTS--%>
         </div>
     </div>
 </div>

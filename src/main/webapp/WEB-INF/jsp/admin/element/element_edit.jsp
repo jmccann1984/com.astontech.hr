@@ -6,11 +6,11 @@
 
     <%@include file="element_sidebar.jsp"%>
 
-    <div id="main-wrapper" class="col-md-11 pull-right">
-        <div class="col-lg-8 col-md-7 col-sm-6">
+    <div id="main-wrapper" class="col-sm-10">
+        <div class="col-sm-8">
 
             <c:set var="idx" value="0" scope="page" />
-            <form:form class="form-horizontal" modelAttribute="elementType" action="/admin/element/update" method="post">
+            <form:form class="form-horizontal" id="elementType" modelAttribute="elementType" action="/admin/element/update" method="post">
                 <form:hidden path="id"/>
                 <form:hidden path="version"/>
 
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-10">
+                    <div class="col-sm-12">
                         <hr>
                     </div>
                 </div>
@@ -32,12 +32,12 @@
                     <form:hidden path="elementList[${idx}].id"/>
                     <form:hidden path="elementList[${idx}].version"/>
                     <div class="row">
-                        <label for="inputElement" class="col-sm-3 control-label">Element</label>
+                        <label for="inputElement${idx}" class="col-sm-3 control-label">Element</label>
                         <div class="col-sm-7">
                             <div class="input-group">
-                                <form:input id="inputElement" path="elementList[${idx}].elementName" class="form-control"/>
+                                <form:input id="inputElement${idx}" path="elementList[${idx}].elementName" class="form-control"/>
                                 <span class="input-group-btn">
-                                    <button name="remove_${idx}" class="btn btn-default">Remove</button>
+                                    <button name="${idx}" class="btn btn-default remove_button" type="button">Remove</button>
                                 </span>
                             </div>
                         </div>
@@ -47,9 +47,9 @@
 
                 <div class="row">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="inputNewElement">Element</label>
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" id="inputNewElement"/>
+                        <label class="col-sm-3 control-label" for="inputNewElement">Add New Element</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="inputNewElement" name="inputNewElement"/>
                         </div>
                     </div>
                 </div>
@@ -60,6 +60,25 @@
             </form:form>
 
         </div>
+        <div class="col-sm-4">
+            <%--ALERTS--%>
+        </div>
     </div>
-
 </div>
+
+<script>
+    $(document).ready(function() {
+        //attach an on click function to the remove buttons
+        $('.remove_button').click(function(){
+            //log name button and contents of associated text box
+            console.log(this.name);
+            console.log($('#inputElement' + this.name).val());
+
+            //clear the value/contents of the textbox
+            $('#inputElement' + this.name).val("");
+
+            //submit the form
+            $('#elementType').submit();
+        })
+    })
+</script>
