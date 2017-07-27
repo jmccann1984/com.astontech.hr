@@ -17,13 +17,13 @@
                 <div class="row">
                     <div class="form-group">
                         <label for="inputElementTypeName" class="col-sm-2 control-label">Element Type</label>
-                        <div class="col-sm-10">
-                            <form:input id="inputElementTypeName" path="elementTypeName" type="text" class="form-control"></form:input>
+                        <div class="col-sm-8">
+                            <form:input id="inputElementTypeName" path="elementTypeName" type="text" class="form-control"/>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-11">
                         <hr>
                     </div>
                 </div>
@@ -46,11 +46,9 @@
                 </c:forEach>
 
                 <div class="row">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="inputNewElement">Add New Element</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="inputNewElement" name="inputNewElement"/>
-                        </div>
+                    <label for="inputNewElement" class="col-sm-3 control-label">Add New Element</label>
+                    <div class="col-sm-7">
+                        <input class="form-control" id="inputNewElement" name="inputNewElement"/>
                     </div>
                 </div>
 
@@ -61,7 +59,31 @@
 
         </div>
         <div class="col-sm-4">
-            <%--ALERTS--%>
+            <%--SUCCESS ALERT--%>
+            <div class="${successAlert == null ? 'hidden' : 'visible'}" id="successAlert">
+                <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
+                </div>
+            </div>
+
+            <%--WARNING ALERT--%>
+            <div class="${warningAlert == null ? 'hidden' : 'visible'}" id="warningAlert">
+                <div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <h4>Warning!</h4>
+                    <p>Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
+                </div>
+            </div>
+
+            <%--ERROR ALERT--%>
+            <div class="${errorAlert == null ? 'hidden' : 'visible'}" id="errorAlert">
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

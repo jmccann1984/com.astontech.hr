@@ -16,6 +16,8 @@
             <link href="${bootstrapCSS}" rel="stylesheet" media="screen"/>
         <c:url value="../../../static/js/common.js" var="common" />
             <script src="${common}"></script>
+        <c:url value="../../../static/css/bootswatch_paper.css" var="bootstrapPAPER" />
+            <link href="${bootstrapPAPER}" rel="stylesheet" media="screen"/>
         <c:url value="../../../static/css/astonengineer.css" var="bootstrapCUSTOM" />
             <link href="${bootstrapCUSTOM}" rel="stylesheet" media="screen"/>
 
