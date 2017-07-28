@@ -15,13 +15,13 @@ public class ElementType {
     @Column(name = "ElementTypeId")
     private Integer id;
 
-    @Version
-    private Integer version;
-
     private String elementTypeName;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Element> elementList;
+
+    @Version
+    private Integer version;
 
     public ElementType() {
     }

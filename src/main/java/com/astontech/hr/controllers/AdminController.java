@@ -39,11 +39,22 @@ public class AdminController {
         return "admin/element/element_add";
     }
 
+    @RequestMapping(value = "/admin/vehicle/add", method = RequestMethod.GET)
+    public String adminVehicle(Model model) {
+        model.addAttribute("");
+        return "admin/vehicle/vehicle_add";
+    }
+
     @RequestMapping(value = "/admin/element/add", method = RequestMethod.POST)
     public String adminElementPost(ElementVO elementVO, Model model){
         elementVO.splitNewElementsIntoArray();
         logElementVO(elementVO);
         saveElementTypeAndElementsFromVO(elementVO);
+
+        boolean success = true;
+        if(success) model.addAttribute("successAlert", "visible");
+        else model.addAttribute("errorAlert", "visible");
+        model.addAttribute("elementVO", new ElementVO());
 
         return "admin/element/element_add";
     }
@@ -66,7 +77,10 @@ public class AdminController {
     @RequestMapping(value = "/admin/element/update", method = RequestMethod.POST)
     public String elementTypeUpdate(ElementType elementType, Model model, @RequestParam("inputNewElement") String newElement) {
         //notes:    if newElement has a value, add it to the list
-        if(!newElement.equals("")) elementType.getElementList().add(new Element(newElement));
+        if(!newElement.equals("")) {
+            if (elementType.getElementList() == null) elementType.setElementList(new ArrayList<Element>());
+            elementType.getElementList().add(new Element(newElement));
+        }
 
         //notes:    iterate through the list of elements
         for(int i=0; i < elementType.getElementList().size(); i++){
@@ -77,6 +91,7 @@ public class AdminController {
             }
         }
         elementTypeService.saveElementType(elementType);
+        model.addAttribute("successAlert", "visible");
         return "redirect:/admin/element/edit/"+elementType.getId();
     }
 

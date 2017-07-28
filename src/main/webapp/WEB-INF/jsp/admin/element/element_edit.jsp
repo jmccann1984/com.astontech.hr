@@ -60,7 +60,7 @@
         </div>
         <div class="col-sm-4">
             <%--SUCCESS ALERT--%>
-            <div class="${successAlert == null ? 'hidden' : 'visible'}" id="successAlert">
+            <div class="${successAlert == null ? 'hidden' : successAlert}" id="successAlert">
                 <div class="alert alert-dismissible alert-success">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
@@ -68,7 +68,7 @@
             </div>
 
             <%--WARNING ALERT--%>
-            <div class="${warningAlert == null ? 'hidden' : 'visible'}" id="warningAlert">
+            <div class="${warningAlert == null ? 'hidden' : warningAlert}" id="warningAlert">
                 <div class="alert alert-dismissible alert-warning">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <h4>Warning!</h4>
@@ -77,7 +77,7 @@
             </div>
 
             <%--ERROR ALERT--%>
-            <div class="${errorAlert == null ? 'hidden' : 'visible'}" id="errorAlert">
+            <div class="${errorAlert == null ? 'hidden' : errorAlert}" id="errorAlert">
                 <div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
