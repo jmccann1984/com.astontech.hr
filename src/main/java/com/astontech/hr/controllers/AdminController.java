@@ -3,7 +3,10 @@ package com.astontech.hr.controllers;
 import com.astontech.hr.domain.Element;
 import com.astontech.hr.domain.ElementType;
 import com.astontech.hr.domain.VO.ElementVO;
+import com.astontech.hr.domain.VehicleMake;
 import com.astontech.hr.services.ElementTypeService;
+import com.astontech.hr.services.VehicleMakeService;
+import com.astontech.hr.services.VehicleModelService;
 import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.lang.model.util.Elements;
+import javax.persistence.GeneratedValue;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +30,12 @@ public class AdminController {
 
     @Autowired
     private ElementTypeService elementTypeService;
+    @Autowired
+    private VehicleMakeService vehicleMakeService;
+    @Autowired
+    private VehicleModelService vehicleModelSevice;
+
+
     private Logger log = Logger.getLogger(AdminController.class);
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -33,16 +43,12 @@ public class AdminController {
         return "admin/adminHome";
     }
 
+
+    //region ELEMENT
     @RequestMapping(value = "/admin/element/add", method = RequestMethod.GET)
     public String adminElement(Model model) {
         model.addAttribute("elementVO", new ElementVO());
         return "admin/element/element_add";
-    }
-
-    @RequestMapping(value = "/admin/vehicle/add", method = RequestMethod.GET)
-    public String adminVehicle(Model model) {
-        model.addAttribute("");
-        return "admin/vehicle/vehicle_add";
     }
 
     @RequestMapping(value = "/admin/element/add", method = RequestMethod.POST)
@@ -101,6 +107,65 @@ public class AdminController {
 
         return "redirect:/admin/element/list";
     }
+    //endregion
+
+    //region VEHICLE
+    //todo: listAll
+    @RequestMapping(value = "admin/vehicle/list", method = RequestMethod.GET)
+    public String adminVehilceList(Model model) {
+        model.addAttribute("vehicleMakeList", vehicleMakeService.listAllVehicleMake());
+        return "admin/vehicle/vehicle_list";
+    }
+
+    //todo: VehicleAdd
+    @RequestMapping(value = "/admin/vehicle/add", method = RequestMethod.GET)
+    public String adminVehicleAdd(Model model) {
+        model.addAttribute("");
+        return "admin/vehicle/vehicle_add";
+    }
+
+    //todo: vehicleMakeAdd
+    @RequestMapping(value = "/admin/vehicle/make/add", method = RequestMethod.GET)
+    public String adminVehicleMakeAdd(Model model) {
+        model.addAttribute("");
+        return "admin/vehicle/vehicle_make_add";
+    }
+
+    //todo: vehicleMakeEdit
+    @RequestMapping(value = "/admin/vehicle/make/{id}", method = RequestMethod.GET)
+    public String adminVehicleMakeEdit(@PathVariable int id, Model model){
+        return "admin/vehicle/vehicle_make_edit";
+    }
+
+    //todo: vehicleModelEdit
+    @RequestMapping(value = "/admin/vehicle/model/{id}", method = RequestMethod.GET)
+    public String adminVehicleModelEdit(@PathVariable int id, Model model){
+        return "admin/vehicle/vehicle_model_edit";
+    }
+    //todo: vehicleEdit
+    @RequestMapping(value = "/admin/vehicle/{id}", method = RequestMethod.GET)
+    public String adminVehicleEdit(@PathVariable int id, Model model){
+        return "admin/vehicle/vehicle_edit";
+    }
+
+    //todo: vehicleMakeDel
+    @RequestMapping(value = "/admin/vehicle/make/del/{id}", method = RequestMethod.GET)
+    public String adminVehicleMakeDelete(@PathVariable int id, Model model){
+        vehicleMakeService.deleteVehicleMake(id);
+        return "redirect:/admin/vehicle/list";
+    }
+
+    //todo: vehicleModelDel
+    @RequestMapping(value = "/admin/vehicle/make{makeId}/model/del/{modelId}", method = RequestMethod.GET)
+    public String adminVehicleMakeDelete(@PathVariable int makeId, @PathVariable int modelId, Model model){
+        VehicleMake vehicleMake = vehicleMakeService.getVehicleMakeById(makeId);
+        vehicleMake.getVehicleModelList().remove(modelId);
+        vehicleMakeService.saveVehicleMake(vehicleMake);
+
+        return "redirect:/admin/vehicle/list";
+    }
+
+    //endregion
 
     //region HELPER METHODS
 

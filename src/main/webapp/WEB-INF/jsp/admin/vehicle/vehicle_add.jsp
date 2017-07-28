@@ -41,6 +41,7 @@
 <script>
     $(document).ready(function(){
         $('#errorAlert, #warningAlert, #successAlert').delay(8000).fadeOut(2000);
+        $("#navbar-collapse-3").attr("aria-expanded", "true").attr("class", "collapse in");
     });
 </script>
 <%@include file="../../includes/footer.jsp"%>

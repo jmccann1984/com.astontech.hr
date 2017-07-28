@@ -29,7 +29,7 @@ public class VehicleMake {
     }
 
     public VehicleMake(String vehicleMakeName, List<VehicleModel> vehicleModelList) {
-        vehicleMakeName = vehicleMakeName;
+        this.vehicleMakeName = vehicleMakeName;
         this.vehicleModelList = vehicleModelList;
     }
 
@@ -42,14 +42,6 @@ public class VehicleMake {
 
     public Integer getId() {
         return this.id;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 
     public String getVehicleMakeName() {

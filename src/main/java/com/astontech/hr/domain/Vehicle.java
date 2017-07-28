@@ -40,13 +40,6 @@ public class Vehicle {
         return this.id;
     }
 
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
 
     public String getPlate() {
         return plate;
