@@ -1,25 +1,24 @@
 package com.astontech.hr.domain.VO;
 
-public class VehicleModelVO {
+public class VehicleMakeVO {
 
-    private String newVehicleMakeType;
+    private String newVehicleMakeName;
     private String newVehicleModels;
     private String[] newVehicleModelArray;
 
-    public VehicleModelVO() {
-    }
 
-    public void SplitVehicleModelsToArray(){
+    public VehicleMakeVO() {}
+
+    public void SplitVehicleModelsToArray() {
         this.setNewVehicleModelArray(this.newVehicleModels.split("\\r?\\n"));
     }
 
-
-    public String getNewVehicleMakeType() {
-        return newVehicleMakeType;
+    public String getNewVehicleMakeName() {
+        return newVehicleMakeName;
     }
 
-    public void setNewVehicleMakeType(String newVehicleMakeType) {
-        this.newVehicleMakeType = newVehicleMakeType;
+    public void setNewVehicleMakeName(String newVehicleMakeName) {
+        this.newVehicleMakeName = newVehicleMakeName;
     }
 
     public String getNewVehicleModels() {

@@ -15,4 +15,5 @@ public interface VehicleMakeService {
     VehicleMake findByVehicleMakeName(String vehicleMakeName);
     List<VehicleMake> findAllByVehicleMakeName (String vehicleMakeName);
     List<VehicleMake> findAllByVehicleMakeNameIgnoreCase(String vehicleMakeName);
+
 }

@@ -1,5 +1,8 @@
 package com.astontech.hr.domain;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,7 +11,7 @@ public class VehicleMake {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "VehicleMakeId")
+    @Column(name = "vehicleMakeId")
     private Integer id;
 
     @Version
@@ -16,7 +19,8 @@ public class VehicleMake {
 
     private String vehicleMakeName;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "vehicleMake")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "vehicleMake")
     private List<VehicleModel> vehicleModelList;
 
 
@@ -25,7 +29,7 @@ public class VehicleMake {
     }
 
     public VehicleMake(String vehicleMakeName) {
-        vehicleMakeName = vehicleMakeName;
+        this.vehicleMakeName = vehicleMakeName;
     }
 
     public VehicleMake(String vehicleMakeName, List<VehicleModel> vehicleModelList) {
@@ -36,12 +40,21 @@ public class VehicleMake {
     //endregion
 
     //region GETTERS/SETTERS
+
+    public Integer getId() {
+        return id;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public Integer getId() {
-        return this.id;
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public String getVehicleMakeName() {
@@ -49,7 +62,7 @@ public class VehicleMake {
     }
 
     public void setVehicleMakeName(String vehicleMakeName) {
-        vehicleMakeName = vehicleMakeName;
+        this.vehicleMakeName = vehicleMakeName;
     }
 
     public List<VehicleModel> getVehicleModelList() {
@@ -59,6 +72,7 @@ public class VehicleMake {
     public void setVehicleModelList(List<VehicleModel> vehicleModelList) {
         this.vehicleModelList = vehicleModelList;
     }
+
 
     //endregion
 }

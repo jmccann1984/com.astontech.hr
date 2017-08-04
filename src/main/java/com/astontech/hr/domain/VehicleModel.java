@@ -1,5 +1,8 @@
 package com.astontech.hr.domain;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,13 +11,18 @@ public class VehicleModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "VehicleModelId")
+    @Column(name = "vehicleModelId")
     private Integer id;
 
     private String vehicleModelName;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "vehicleModel")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "vehicleModel")
     private List<Vehicle> vehicleList;
+
+//    @JoinColumn(name = "vehicleMake", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private VehicleMake vehicleMake;
 
     @Version
     private Integer version;
@@ -28,20 +36,32 @@ public class VehicleModel {
         this.vehicleModelName = vehicleModelName;
     }
 
+    public VehicleModel(String vehicleModelName, VehicleMake vehicleMake) {
+        this.vehicleModelName = vehicleModelName;
+        this.vehicleMake = vehicleMake;
+    }
+
     public VehicleModel(String vehicleModelName, List<Vehicle> vehicleList) {
         this.vehicleModelName = vehicleModelName;
         this.vehicleList = vehicleList;
     }
 
+    public VehicleModel(String vehicleModelName, List<Vehicle> vehicleList, VehicleMake vehicleMake) {
+        this.vehicleModelName = vehicleModelName;
+        this.vehicleList = vehicleList;
+        this.vehicleMake = vehicleMake;
+    }
+
     //endregion
 
     //region GETTERS/SETTERS
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getId() {
-        return this.id;
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getVehicleModelName() {
@@ -52,7 +72,6 @@ public class VehicleModel {
         this.vehicleModelName = vehicleModelName;
     }
 
-
     public List<Vehicle> getVehicleList() {
         return vehicleList;
     }
@@ -61,5 +80,21 @@ public class VehicleModel {
         this.vehicleList = vehicleList;
     }
 
-    //endregion
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public VehicleMake getVehicleMake() {
+        return vehicleMake;
+    }
+
+    public void setVehicleMake(VehicleMake vehicleMake) {
+        this.vehicleMake = vehicleMake;
+    }
+
+//endregion
 }
