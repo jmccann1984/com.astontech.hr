@@ -36,21 +36,12 @@ public class ElementType {
     }
 
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
-
-    public Integer getVersion() {
-        return this.version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
 
     public String getElementTypeName() {
         return elementTypeName;
@@ -66,5 +57,13 @@ public class ElementType {
 
     public void setElementList(List<Element> elementList) {
         this.elementList = elementList;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

@@ -1,13 +1,17 @@
 package com.astontech.hr.configuration;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
+import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.security.access.method.P;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,8 +40,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     @Value("${spring.security.ldap.url}")
     private String ldapUrl;
 
-    @Autowired
-    private DataSource dataSource;
+//    @Autowired
+//    private DataSource dataSource;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -45,23 +49,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
             auth.inMemoryAuthentication().withUser("user").password("qwe123$!").roles("USER");
             auth.inMemoryAuthentication().withUser("admin").password("qwe123$!").roles("ADMIN");
             auth.inMemoryAuthentication().withUser("dba").password("qwe123$!").roles("DBA");
+
         } else if (authenticationMethod.equals("LDAP")) {
             auth.authenticationProvider(activeDirectoryLdapAuthenticationProvider());
+
         } else if (authenticationMethod.equals("DATABASE")) {
-            JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager();
-            userDetailsManager.setDataSource(dataSource);
-            PasswordEncoder encoder = new BCryptPasswordEncoder();
+//            JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager();
+//            userDetailsManager.setDataSource(dataSource);
+//            PasswordEncoder encoder = new BCryptPasswordEncoder();
+//
+//            auth.userDetailsService(userDetailsManager).passwordEncoder(encoder);
+//            auth.jdbcAuthentication().dataSource(dataSource);
+//
+//            if(!userDetailsManager.userExists("user")) {
+//                List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+//                authorities.add(new SimpleGrantedAuthority("USER"));
+//                User userDetails = new User("user", encoder.encode("password"), authorities);
+//
+//                userDetailsManager.createUser(userDetails);}
 
-            auth.userDetailsService(userDetailsManager).passwordEncoder(encoder);
-            auth.jdbcAuthentication().dataSource(dataSource);
-
-            if(!userDetailsManager.userExists("user")) {
-                List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-                authorities.add(new SimpleGrantedAuthority("USER"));
-                User userDetails = new User("user", encoder.encode("password"), authorities);
-
-                userDetailsManager.createUser(userDetails);
-            }
 
         } else if (authenticationMethod.equals("NONE")) {}
     }
