@@ -6,6 +6,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/api/address")
 public class AddressRest {
@@ -22,7 +24,10 @@ public class AddressRest {
     public Address getAddress(@PathVariable Integer id){ return addressService.getAddressById(id); }
 
     @RequestMapping(value="/", method = RequestMethod.POST)
-    public Address saveAddress(@ModelAttribute("address") Address address) { return addressService.saveAddress(address); }
+    public Address saveAddress(@RequestBody Address address) { return addressService.saveAddress(address); }
+
+    @RequestMapping(value="/m", method = RequestMethod.POST)
+    public Iterable<Address> saveAddressList(@RequestBody Iterable<Address> addressList) { return addressService.saveAddressList(addressList); }
 
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
     public Boolean deleteAddress(@PathVariable Integer id) {
