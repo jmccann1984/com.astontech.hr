@@ -25,7 +25,7 @@ public class Application {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
         for( String bean : ctx.getBeanDefinitionNames()) {
             String beanS = ctx.getBean(bean).toString();
-            if(beanS.contains("ecurity")) {
+            if(beanS.contains("SecurityConfigurations")) {
                 System.out.println(beanS);
             }
         }
