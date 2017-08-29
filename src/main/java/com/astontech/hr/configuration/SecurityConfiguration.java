@@ -1,7 +1,7 @@
 package com.astontech.hr.configuration;
 
 import com.astontech.hr.configuration.SecurityConfigurations.SecurityProfileController;
-//import com.astontech.hr.configuration.SecurityConfigurations.SecurityProfileFactory;
+import com.astontech.hr.configuration.SecurityConfigurations.SecurityProfileFactory;
 import com.astontech.hr.configuration.SecurityConfigurations.SecurityProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

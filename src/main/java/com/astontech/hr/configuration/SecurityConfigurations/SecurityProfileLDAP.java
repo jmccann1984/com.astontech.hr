@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
-@Profile("ldap")
+//@Profile("ldap")
 public class SecurityProfileLDAP implements SecurityProfileService {
 
     @Value("${spring.security.ldap.domain}")

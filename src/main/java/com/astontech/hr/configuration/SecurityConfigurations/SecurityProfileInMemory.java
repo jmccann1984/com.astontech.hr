@@ -6,7 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.stereotype.Service;
 
 @Service
-@Profile("inMemory")
+//@Profile("inMemory")
 public class SecurityProfileInMemory implements SecurityProfileService{
     @Override
     public void AuthorizationMethod(AuthenticationManagerBuilder auth) throws Exception {

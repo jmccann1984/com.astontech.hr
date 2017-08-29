@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Profile("database")
+//@Profile("database")
 public class SecurityProfileDatabase implements SecurityProfileService {
 
     DataSource dataSource;

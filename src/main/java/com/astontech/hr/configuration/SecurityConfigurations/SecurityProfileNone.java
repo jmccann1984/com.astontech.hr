@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
-@Profile("none")
+//@Profile("none")
 public class SecurityProfileNone implements SecurityProfileService {
 
     @Override
